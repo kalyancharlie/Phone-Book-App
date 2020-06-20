@@ -23,13 +23,30 @@ public class ContactServiceImpl implements ContactService {
 	
 	@Override
 	public void insertContact(Contacts contact, String memory) {
-		if(memory.toLowerCase().equals("sim")) {
-			sim.add(contact);
-			System.out.println("\nContact Inserted Successfully into SIM\n");
-		} else if (memory.toLowerCase().equals("phone")) {
-			phone.add(contact);
-			System.out.println("\nContact Inserted Successfully into PHONE\n");
+		boolean flag = true;
+		if(memory.equalsIgnoreCase("sim"))
+		for(int i=0; i<sim.size(); i++) {
+			if(sim.get(i).name.equalsIgnoreCase(contact.name)) {
+				flag = false;
+			}
 		}
+		if(memory.equalsIgnoreCase("phone"))
+		for(int i=0; i<phone.size(); i++) {
+			if(phone.get(i).name.equalsIgnoreCase(contact.name)) {
+				flag = false;
+			}
+		}
+		if(!flag) {
+			System.out.println("\nContact with name " + contact.name + " already exists in " +memory+"\n");
+		}
+		if(memory.toLowerCase().equals("sim") && flag) {
+			sim.add(contact);
+			System.out.println("\nContact " + contact.name +" Inserted Successfully into SIM\n");
+		} else if (memory.toLowerCase().equals("phone") && flag) {
+			phone.add(contact);
+			System.out.println("\nContact " + contact.name +" Inserted Successfully into PHONE\n");
+		}
+		
 	}
 
 	@Override
