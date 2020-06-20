@@ -1,7 +1,5 @@
 package com.kalyancharlie;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -140,7 +138,7 @@ public class ContactServiceImpl implements ContactService {
 			}
 		}
 		if(flag) {
-			System.out.println("\n			End of Contacts!");
+			System.out.println("\n	 End of Contacts!");
 			System.out.println("*********************************************");
 		}
 	}
@@ -150,30 +148,45 @@ public class ContactServiceImpl implements ContactService {
 		if(target.equalsIgnoreCase("sim")) {
 			if(!sim.contains(contact)) {
 				sim.add(contact);
+				System.out.println("\nContact Copied Successfully\n");
+			} else {
+				System.out.println("\nContact already Exists in "+target+"\n");
 			}
 		} else if(target.equalsIgnoreCase("phone")) {
 			if(!phone.contains(contact)) {
 				phone.add(contact);
+				System.out.println("\nContact Copied Successfully\n");
+			} else {
+				System.out.println("\nContact already Exists in "+target+"\n");
 			}
 		}
-		System.out.println("Contact Copied Successfully");
 	}
 
 	@Override
 	public void copyAll(ArrayList<Contacts> contact, String target) {
+		int copiedContacts=0, conflictContacts=0;
 		if(target.equalsIgnoreCase("sim")) {
 			for(int i=0; i<contact.size(); i++) {
 				if(!sim.contains(contact.get(i))) {
 					sim.add(contact.get(i));
+					copiedContacts++;
+				} else {
+					conflictContacts++;
 				}
 			}
+				System.out.println("\n"+copiedContacts+" Contacts Copied Successfully");
+				System.out.println("\n"+conflictContacts+" Conflict Contacts\n");
 		} else if(target.equalsIgnoreCase("phone")) {
 			for(int i=0; i<contact.size(); i++) {
 				if(!phone.contains(contact.get(i))) {
 					phone.add(contact.get(i));
+					copiedContacts++;
+				} else {
+					conflictContacts++;
 				}
 			}
+				System.out.println("\n"+copiedContacts+" Contacts Copied Successfully");
+				System.out.println("\n"+conflictContacts+" Conflict Contacts\n");
 		}
-		System.out.println("Contacts Copied Successfully");
 	}	
 }

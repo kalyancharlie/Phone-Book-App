@@ -9,7 +9,6 @@ public class Main {
 		String name;
 		long mobileNumber;
 		String emailId;
-		String memory;
 		ContactServiceImpl conService = new ContactServiceImpl();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("*********************************************");
@@ -169,23 +168,76 @@ public class Main {
 				System.out.println("******************************************");
 				conService.display(conService.getSim(), conService.getPhone());
 				break;
-				
 			}
 			// COPYING CONTACT
 			case 5: {
-				System.out.println("******************************************");
-				System.out.println("              COPYING MODE");
-				System.out.println("******************************************");
-				break;
-				
+				do {
+					System.out.println("******************************************");
+					System.out.println("              COPYING MODE");
+					System.out.println("******************************************");
+					System.out.println("\nSelect the Copying Method");
+					System.out.println("1. By name");
+					System.out.println("2. By number");
+					System.out.print("\nEnter your choice:");
+					int opt = sc.nextInt();
+					if(opt == 1) {
+						sc.nextLine();
+						System.out.print("\nEnter Name of contact to copy: ");
+						String nameToSearch = sc.nextLine();
+						System.out.print("Enter Memory location (SIM/PHONE): ");
+						String memoryToFind = sc.next();
+						Contacts find = conService.searchContact(nameToSearch, memoryToFind);
+						if(find!=null) {
+							sc.nextLine();
+							System.out.print("Enter the target Memory to copy: ");
+							String targetMemory = sc.nextLine();
+							conService.copy(find, targetMemory);
+						}
+					} else if (opt == 2) {
+						sc.nextLine();
+						System.out.print("Enter Number: ");
+						long numberToSearch = sc.nextLong(); sc.nextLine();
+						System.out.print("Enter Memory Location (SIM/PHONE): ");
+						String memoryToFind = sc.next();
+						Contacts find = conService.searchContact(numberToSearch, memoryToFind);
+						if(find!=null) {
+							sc.nextLine();
+							System.out.print("Enter the target Memory to copy: ");
+							String targetMemory = sc.nextLine();
+							conService.copy(find, targetMemory);							
+						}
+					} else {
+						System.out.print("Wrong Option Selected!!!!");
+					}
+					System.out.println("Want to Copy Another Contact.");
+					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					subChoice = sc.next().charAt(0);
+				} while(subChoice =='y' || subChoice =='Y');
+				break;				
 			}
 			// COPYING ALL CONTACTS
 			case 6: {
-				System.out.println("******************************************");
-				System.out.println("              COPYING MODE");
-				System.out.println("******************************************");
+				do {
+					System.out.println("******************************************");
+					System.out.println("              COPYING MODE");
+					System.out.println("******************************************");
+					System.out.println("\nSelect the Copying Method");
+					System.out.println("1. From SIM to Phone");
+					System.out.println("2. From Phone to SIM");
+					System.out.print("\nEnter your choice:");
+					int opt = sc.nextInt();
+					if(opt == 1) {
+						conService.copyAll(conService.getSim(), "phone");
+					} else if (opt == 2) {
+						conService.copyAll(conService.getPhone(), "sim");
+					} else {
+						System.out.print("Wrong Option Selected!!!!");
+					}
+					System.out.println("Want to Copy Another Contact.");
+					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					subChoice = sc.next().charAt(0);
+				} while(subChoice =='y' || subChoice =='Y');
 				break;
-				
 			}
 			case 0: {				
 				System.out.println("\nThank you for using our App.");
@@ -206,5 +258,6 @@ public class Main {
 			}
 			}
 		}while(choice!=0);
+		sc.close();
 	}
 }
