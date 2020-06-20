@@ -77,7 +77,7 @@ public class ContactServiceImpl implements ContactService {
 					return sim.get(i);
 				}
 			}
-			System.out.println("No Contact found with the name: "+name.toUpperCase());
+			System.out.println("\nNo Contact found with the name: "+name.toUpperCase()+"\n");
 			return null;
 		} else if(memory.toLowerCase().equals("phone")) {
 			for(int i=0; i<phone.size(); i++) {
@@ -85,7 +85,7 @@ public class ContactServiceImpl implements ContactService {
 					return phone.get(i);
 				}
 			}
-			System.out.println("No Contact found with the name: "+name.toUpperCase());
+			System.out.println("\nNo Contact found with the name: "+name.toUpperCase()+"\n");
 			return null;
 		}
 		return null;

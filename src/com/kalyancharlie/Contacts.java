@@ -42,6 +42,6 @@ public class Contacts {
 
 	@Override
 	public String toString() {
-		return "Name=" + name + ", Mobile=" + mobileNumber + ", EmailId=" + emailId;
+		return "Name: " + name + ", Mobile: " + mobileNumber + ", EmailId: " + emailId;
 	}
 }

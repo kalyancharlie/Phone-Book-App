@@ -23,7 +23,7 @@ public class Main {
 			System.out.println("5. Copy");
 			System.out.println("6. Copy All");
 			System.out.println("0. Exit");
-			System.out.print("Enter your choice:");
+			System.out.print("\nEnter your choice:");
 			choice = sc.nextInt();
 			switch(choice) {
 			//	INSERTING CONTACTS
@@ -33,7 +33,7 @@ public class Main {
 					System.out.println("              INSERT MODE");
 					System.out.println("******************************************");
 					sc.nextLine();
-					System.out.print("Enter Name: ");
+					System.out.print("\nEnter Name: ");
 					name = sc.nextLine();
 					System.out.print("Enter Number: ");
 					mobileNumber = sc.nextLong(); sc.nextLine();
@@ -50,13 +50,7 @@ public class Main {
 					} else if (opt == 2) {
 						conService.insertContact(con, "phone");
 					} else {
-						System.out.print("Wrong Option Selected!!!! Try again:");
-						opt = sc.nextInt();
-						if(opt == 1) {
-							conService.insertContact(con, "sim");
-						} else if (opt == 2) {
-							conService.insertContact(con, "phone");
-						}
+						System.out.print("Wrong Option Selected!!!!");
 					}
 					System.out.println("Want to Insert Another Contact.");
 					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
@@ -78,6 +72,38 @@ public class Main {
 				System.out.println("******************************************");
 				System.out.println("              SEARCHING MODE");
 				System.out.println("******************************************");
+				do {
+					System.out.println("\nSelect the Search Method");
+					System.out.println("1. By name");
+					System.out.println("2. By number");
+					System.out.print("\nEnter your choice:");
+					int opt = sc.nextInt();
+					if(opt == 1) {
+						sc.nextLine();
+						System.out.print("Enter Name: ");
+						String nameToSearch = sc.nextLine();
+						System.out.print("Enter Memory location (SIM/PHONE): ");
+						String memoryToFind = sc.next();
+						Contacts find = conService.searchContact(nameToSearch, memoryToFind);
+						if(find!=null)
+						System.out.println("\nName: "+find.name+", Mobile: "+find.mobileNumber+", EmailId: "+find.emailId+"\n");
+					} else if (opt == 2) {
+						sc.nextLine();
+						System.out.print("Enter Number: ");
+						long numberToSearch = sc.nextLong();
+						sc.nextLine();
+						System.out.print("Enter Memory Location (SIM/PHONE): ");
+						String memoryToFind = sc.next();
+						Contacts find = conService.searchContact(numberToSearch, memoryToFind);
+						if(find!=null)
+						System.out.println("\nName: "+find.name+" Mobile: "+find.mobileNumber+" EmailId: "+find.emailId+"\n");
+					} else {
+						System.out.print("Wrong Option Selected!!!!");
+					}
+					System.out.println("Want to Search Another Contact.");
+					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					subChoice = sc.next().charAt(0);
+				} while(subChoice =='y' || subChoice =='Y');
 				break;
 				
 			}
