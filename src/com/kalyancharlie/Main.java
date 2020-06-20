@@ -38,7 +38,7 @@ public class Main {
 					System.out.print("Enter Number: ");
 					mobileNumber = sc.nextLong(); sc.nextLine();
 					System.out.print("Enter EmailId: ");
-					emailId = sc.nextLine();
+					emailId = sc.next();
 					Contacts con = new Contacts(name, mobileNumber, emailId);
 					System.out.println("\nSelect the target Memory");
 					System.out.println("1. SIM");
@@ -61,18 +61,73 @@ public class Main {
 			}
 			//	UPDATING CONTACTS
 			case 2: {
-				System.out.println("******************************************");
-				System.out.println("              UPDATING MODE");
-				System.out.println("******************************************");
-				break;
-				
+				do {
+					System.out.println("******************************************");
+					System.out.println("              UPDATING MODE");
+					System.out.println("******************************************");
+					System.out.println("\nSelect the Update Method");
+					System.out.println("1. By name");
+					System.out.println("2. By number");
+					System.out.print("\nEnter your choice:");
+					int opt = sc.nextInt();
+					if(opt == 1) {
+						sc.nextLine();
+						System.out.print("\nEnter Name of contact to find: ");
+						String nameToSearch = sc.nextLine();
+						System.out.print("Enter Memory location (SIM/PHONE): ");
+						String memoryToFind = sc.next();
+						Contacts find = conService.searchContact(nameToSearch, memoryToFind);
+						System.out.println("\nEnter 0 if you don't want to update particular field\n");
+						if(find!=null) {
+							sc.nextLine();
+							System.out.print("Enter the New Name: ");
+							name = sc.nextLine();
+							System.out.print("Enter the New Number: ");
+							mobileNumber = sc.nextLong(); sc.nextLine();
+							System.out.print("Enter the new EmailId: ");
+							emailId = sc.next();
+							if(name.equals("0")) name = find.name;
+							if(mobileNumber == 0) mobileNumber = find.mobileNumber;
+							if(emailId.equals("0")) emailId = find.emailId;
+							Contacts updated = new Contacts(name, mobileNumber, emailId);
+							conService.updateContact(find, updated, memoryToFind);
+						}
+					} else if (opt == 2) {
+						sc.nextLine();
+						System.out.print("Enter Number: ");
+						long numberToSearch = sc.nextLong(); sc.nextLine();
+						System.out.print("Enter Memory Location (SIM/PHONE): ");
+						String memoryToFind = sc.next();
+						Contacts find = conService.searchContact(numberToSearch, memoryToFind);
+						if(find!=null) {
+							sc.nextLine();
+							System.out.print("Enter the New Name: ");
+							name = sc.nextLine();
+							System.out.print("Enter the New Number: ");
+							mobileNumber = sc.nextLong(); sc.nextLine();
+							System.out.print("Enter the new EmailId: ");
+							emailId = sc.next();
+							if(name.equals("0")) name = find.name;
+							if(mobileNumber == 0) mobileNumber = find.mobileNumber;
+							if(emailId.equals("0")) emailId = find.emailId;
+							Contacts updated = new Contacts(name, mobileNumber, emailId);
+							conService.updateContact(find, updated, memoryToFind);
+						}
+					} else {
+						System.out.print("Wrong Option Selected!!!!");
+					}
+					System.out.println("Want to Update Another Contact.");
+					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					subChoice = sc.next().charAt(0);
+				} while(subChoice =='y' || subChoice =='Y');
+				break;				
 			}
 			//	SEARCHING CONTACTS
 			case 3: {
-				System.out.println("******************************************");
-				System.out.println("              SEARCHING MODE");
-				System.out.println("******************************************");
 				do {
+					System.out.println("******************************************");
+					System.out.println("              SEARCHING MODE");
+					System.out.println("******************************************");
 					System.out.println("\nSelect the Search Method");
 					System.out.println("1. By name");
 					System.out.println("2. By number");

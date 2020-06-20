@@ -56,7 +56,7 @@ public class ContactServiceImpl implements ContactService {
 			for(int i=0; i<sim.size(); i++) {
 				if(sim.get(i).equals(found)) {
 					sim.set(i, updated);
-					System.out.println("Contact Updated Successfully");
+					System.out.println("\nContact Updated Successfully\n");
 				}
 			}
 		} else if(memory.toLowerCase().equals("phone")) {
