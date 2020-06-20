@@ -25,8 +25,10 @@ public class ContactServiceImpl implements ContactService {
 	public void insertContact(Contacts contact, String memory) {
 		if(memory.toLowerCase().equals("sim")) {
 			sim.add(contact);
+			System.out.println("\nContact Inserted Successfully into SIM\n");
 		} else if (memory.toLowerCase().equals("phone")) {
 			phone.add(contact);
+			System.out.println("\nContact Inserted Successfully into PHONE\n");
 		}
 	}
 
@@ -94,17 +96,35 @@ public class ContactServiceImpl implements ContactService {
 
 	@Override
 	public void display(ArrayList<Contacts> sim, ArrayList<Contacts> phone) {
+		boolean flag = true;
+		if(sim==null && phone==null || sim.size()<1 && phone.size()<1) {
+			System.out.println("No Contacts in memory. Add Contacts to display them");
+			flag = false;
+			return;
+		}
 		ArrayList<Contacts> both = new ArrayList<Contacts>();
-		Collections.copy(both, sim);
-		Collections.copy(both, phone);
 		Map<String, Integer> all = new HashMap<String, Integer>();
+		if(sim!=null) {
+			for(int i=0; i<sim.size(); i++) {
+				both.add(sim.get(i));
+			}
+		} if (phone!=null) {
+			for(int i=0; i<phone.size(); i++) {
+				both.add(phone.get(i));
+			}
+		}
+		
 		for(int i=0; i<both.size(); i++) {
 			all.put(both.get(i).name, i );
 		}
-		for(int i=0; i<both.size(); i++) {
+		for(int i=0, j=0; i<both.size(); i++) {
 			if(i==all.get(both.get(i).name)) {
-				System.out.println(i+1+" "+both.get(i));
+				System.out.println(++j+". "+both.get(i));
 			}
+		}
+		if(flag) {
+			System.out.println("\n			End of Contacts!");
+			System.out.println("*********************************************");
 		}
 	}
 
