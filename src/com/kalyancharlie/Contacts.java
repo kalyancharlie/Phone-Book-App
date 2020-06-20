@@ -1,5 +1,11 @@
 package com.kalyancharlie;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.kalyancharlie.exceptions.InvalidEmailException;
+import com.kalyancharlie.exceptions.InvalidMobileNumberException;
+
 public class Contacts {
 	String name;
 	long mobileNumber;
@@ -28,16 +34,28 @@ public class Contacts {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(long mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setMobileNumber(long mobileNumber) throws InvalidMobileNumberException {
+		if(String.valueOf(mobileNumber).length()!=10) {
+			throw new InvalidMobileNumberException("Invalid Mobile Number:"+mobileNumber);
+		} else {
+			this.mobileNumber = mobileNumber;
+		}
 	}
 
 	public String getEmailId() {
 		return emailId;
 	}
 
-	public void setEmailId(String emailId) {
+	public void setEmailId(String emailId) throws InvalidEmailException {
+		boolean flag = false;
+		Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9_.]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+		Matcher m = p.matcher(emailId);
+		while(m.find()) {
+			flag = true;
+		}
+		if(flag)
 		this.emailId = emailId;
+		else throw new InvalidEmailException("Invalid Email Id: "+emailId);
 	}
 
 	@Override

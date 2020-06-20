@@ -1,6 +1,9 @@
 package com.kalyancharlie;
 import java.util.*;
 
+import com.kalyancharlie.exceptions.InvalidEmailException;
+import com.kalyancharlie.exceptions.InvalidMobileNumberException;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -38,23 +41,34 @@ public class Main {
 					mobileNumber = sc.nextLong(); sc.nextLine();
 					System.out.print("Enter EmailId: ");
 					emailId = sc.next();
-					Contacts con = new Contacts(name, mobileNumber, emailId);
-					System.out.println("\nSelect the target Memory");
-					System.out.println("1. SIM");
-					System.out.println("2. Phone");
-					System.out.print("\nEnter your choice:");
-					int opt = sc.nextInt();
-					if(opt == 1) {
-						conService.insertContact(con, "sim");
-					} else if (opt == 2) {
-						conService.insertContact(con, "phone");
-					} else {
-						System.out.print("Wrong Option Selected!!!!");
+					Contacts con = new Contacts();
+					try {
+						con.setName(name);
+						con.setMobileNumber(mobileNumber);
+					} catch (InvalidMobileNumberException e) {
+						System.out.println("\nError! "+e.getMessage());
+					} try {
+						con.setEmailId(emailId);
+						System.out.println("\nSelect the target Memory");
+						System.out.println("1. SIM");
+						System.out.println("2. Phone");
+						System.out.print("\nEnter your choice:");
+						int opt = sc.nextInt();
+						if(opt == 1) {
+							conService.insertContact(con, "sim");
+						} else if (opt == 2) {
+							conService.insertContact(con, "phone");
+						} else {
+							System.out.print("Wrong Option Selected!!!!");
+						}
+						System.out.println("Want to Insert Another Contact.");
+						System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+						sc.nextLine();
+						subChoice = sc.next().charAt(0);
 					}
-					System.out.println("Want to Insert Another Contact.");
-					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
-					sc.nextLine();
-					subChoice = sc.next().charAt(0);
+					catch (InvalidEmailException e) {
+						System.out.println("Error! "+e.getMessage()+"\n");
+					}
 				} while(subChoice =='y' || subChoice =='Y');
 				break;
 			}
