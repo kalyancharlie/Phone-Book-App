@@ -2,6 +2,7 @@ package com.kalyancharlie;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ContactServiceImpl implements ContactService {
 	ArrayList<Contacts> sim = new ArrayList<Contacts>();
@@ -132,13 +133,12 @@ public class ContactServiceImpl implements ContactService {
 		for(int i=0; i<both.size(); i++) {
 			all.put(both.get(i).name, i );
 		}
-		for(int i=0, j=0; i<both.size(); i++) {
-			if(i==all.get(both.get(i).name)) {
-				System.out.println(++j+". "+both.get(i));
-			}
-		}
+		TreeMap<String, Integer> sorted = new TreeMap<>(); 
+        sorted.putAll(all); 
+        for (Map.Entry<String, Integer> entry : sorted.entrySet())  
+            System.out.println(both.get(entry.getValue()));
 		if(flag) {
-			System.out.println("\n	 End of Contacts!");
+			System.out.println("\n	        End of Contacts!");
 			System.out.println("*********************************************");
 		}
 	}
