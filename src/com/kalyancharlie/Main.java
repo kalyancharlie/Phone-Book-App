@@ -87,7 +87,7 @@ public class Main {
 						sc.nextLine();
 						System.out.print("\nEnter Name of contact to find: ");
 						String nameToSearch = sc.nextLine();
-						System.out.print("Enter Memory location (SIM/PHONE): ");
+						System.out.print("Enter Source Memory location (SIM/PHONE): ");
 						String memoryToFind = sc.next();
 						Contacts find = conService.searchContact(nameToSearch, memoryToFind);
 						System.out.println("\nEnter 0 if you don't want to update particular field\n");
@@ -109,7 +109,7 @@ public class Main {
 						sc.nextLine();
 						System.out.print("Enter Number: ");
 						long numberToSearch = sc.nextLong(); sc.nextLine();
-						System.out.print("Enter Memory Location (SIM/PHONE): ");
+						System.out.print("Enter Source Memory Location (SIM/PHONE): ");
 						String memoryToFind = sc.next();
 						Contacts find = conService.searchContact(numberToSearch, memoryToFind);
 						if(find!=null) {
@@ -130,7 +130,7 @@ public class Main {
 						System.out.print("Wrong Option Selected!!!!");
 					}
 					System.out.println("Want to Update Another Contact.");
-					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					System.out.print("Press Y to Proceed and N to Exit Update Mode: ");
 					subChoice = sc.next().charAt(0);
 				} while(subChoice =='y' || subChoice =='Y');
 				break;				
@@ -150,7 +150,7 @@ public class Main {
 						sc.nextLine();
 						System.out.print("Enter Name: ");
 						String nameToSearch = sc.nextLine();
-						System.out.print("Enter Memory location (SIM/PHONE): ");
+						System.out.print("Enter Source Memory location (SIM/PHONE): ");
 						String memoryToFind = sc.next();
 						Contacts find = conService.searchContact(nameToSearch, memoryToFind);
 						if(find!=null)
@@ -160,7 +160,7 @@ public class Main {
 						System.out.print("Enter Number: ");
 						long numberToSearch = sc.nextLong();
 						sc.nextLine();
-						System.out.print("Enter Memory Location (SIM/PHONE): ");
+						System.out.print("Enter Source Memory Location (SIM/PHONE): ");
 						String memoryToFind = sc.next();
 						Contacts find = conService.searchContact(numberToSearch, memoryToFind);
 						if(find!=null)
@@ -169,7 +169,7 @@ public class Main {
 						System.out.print("Wrong Option Selected!!!!");
 					}
 					System.out.println("Want to Search Another Contact.");
-					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					System.out.print("Press Y to Proceed and N to Exit Search Mode: ");
 					subChoice = sc.next().charAt(0);
 				} while(subChoice =='y' || subChoice =='Y');
 				break;
@@ -198,7 +198,7 @@ public class Main {
 						sc.nextLine();
 						System.out.print("\nEnter Name of contact to copy: ");
 						String nameToSearch = sc.nextLine();
-						System.out.print("Enter Memory location (SIM/PHONE): ");
+						System.out.print("Enter Source Memory location (SIM/PHONE): ");
 						String memoryToFind = sc.next();
 						Contacts find = conService.searchContact(nameToSearch, memoryToFind);
 						if(find!=null) {
@@ -211,7 +211,7 @@ public class Main {
 						sc.nextLine();
 						System.out.print("Enter Number: ");
 						long numberToSearch = sc.nextLong(); sc.nextLine();
-						System.out.print("Enter Memory Location (SIM/PHONE): ");
+						System.out.print("Enter Source Memory Location (SIM/PHONE): ");
 						String memoryToFind = sc.next();
 						Contacts find = conService.searchContact(numberToSearch, memoryToFind);
 						if(find!=null) {
@@ -224,7 +224,7 @@ public class Main {
 						System.out.print("Wrong Option Selected!!!!");
 					}
 					System.out.println("Want to Copy Another Contact.");
-					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					System.out.print("Press Y to Proceed and N to Exit Copy Mode: ");
 					subChoice = sc.next().charAt(0);
 				} while(subChoice =='y' || subChoice =='Y');
 				break;				
@@ -248,7 +248,7 @@ public class Main {
 						System.out.print("Wrong Option Selected!!!!");
 					}
 					System.out.println("Want to Copy Another Contact.");
-					System.out.print("Press Y to Proceed and N to Exit Insert Mode: ");
+					System.out.print("Press Y to Proceed and N to Exit Copy Mode: ");
 					subChoice = sc.next().charAt(0);
 				} while(subChoice =='y' || subChoice =='Y');
 				break;
