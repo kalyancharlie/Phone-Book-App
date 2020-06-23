@@ -13,6 +13,12 @@ public class Main {
 		long mobileNumber;
 		String emailId;
 		ContactServiceImpl conService = new ContactServiceImpl();
+		try {
+			conService.setSim(conService.fetch("sim.txt"));
+			conService.setPhone(conService.fetch("phone.txt"));
+		} catch (Exception e1) {
+			System.out.println("\nContacts Loading Failed!!!\n");
+		}
 		Scanner sc = new Scanner(System.in);
 		System.out.println("*********************************************");
 		System.out.println("           CONTACTS MANAGER V1.0.0");
@@ -24,6 +30,7 @@ public class Main {
 			System.out.println("4. Display");
 			System.out.println("5. Copy");
 			System.out.println("6. Copy All");
+			System.out.println("7. Save Contacts");
 			System.out.println("0. Exit");
 			System.out.print("\nEnter your choice:");
 			choice = sc.nextInt();
@@ -251,6 +258,16 @@ public class Main {
 					System.out.print("Press Y to Proceed and N to Exit Copy Mode: ");
 					subChoice = sc.next().charAt(0);
 				} while(subChoice =='y' || subChoice =='Y');
+				break;
+			}
+			case 7: {
+				try {
+					conService.save(conService.getSim(), "sim.txt");
+					conService.save(conService.getPhone(), "phone.txt");
+				} catch (Exception e) {
+					System.out.println("Contacts Saving Failed");
+				}
+				System.out.println("Contacts Saved Successfully");
 				break;
 			}
 			case 0: {				

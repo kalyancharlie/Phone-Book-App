@@ -1,4 +1,10 @@
 package com.kalyancharlie;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +26,14 @@ public class ContactServiceImpl implements ContactService {
 		return phone;
 	}
 	
+	public void setSim(ArrayList<Contacts> sim) {
+		this.sim = sim;
+	}
+
+	public void setPhone(ArrayList<Contacts> phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public void insertContact(Contacts contact, String memory) {
 		boolean flag = true;
@@ -188,5 +202,23 @@ public class ContactServiceImpl implements ContactService {
 				System.out.println("\n"+copiedContacts+" Contacts Copied Successfully");
 				System.out.println("\n"+conflictContacts+" Conflict Contacts\n");
 		}
+	}
+
+	@Override
+	public void save(ArrayList<Contacts> contact, String fileName) throws IOException {
+		File file = new File(fileName);
+		FileOutputStream fos = new FileOutputStream(file);
+		ObjectOutputStream obj = new ObjectOutputStream(fos);
+		obj.writeObject(contact);
+		obj.close();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<Contacts> fetch(String fileName) throws Exception {
+		File file = new File(fileName);
+		FileInputStream fis = new FileInputStream(file);
+		ObjectInputStream obj = new ObjectInputStream(fis);
+		return (ArrayList<Contacts>)obj.readObject();
 	}	
 }

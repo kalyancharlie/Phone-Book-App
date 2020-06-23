@@ -1,12 +1,14 @@
 package com.kalyancharlie;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.kalyancharlie.exceptions.InvalidEmailException;
 import com.kalyancharlie.exceptions.InvalidMobileNumberException;
 
-public class Contacts {
+@SuppressWarnings("serial")
+public class Contacts implements Serializable{
 	String name;
 	long mobileNumber;
 	String emailId;
