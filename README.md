@@ -10,7 +10,4 @@ A Java based application to **Manage Contacts**
 - Display Contacts
 - Copying Contacts from Phone memory to SIM and Vice-Versa
 *****
-### Contributers
-[KALYAN CHINNA BATHULA](https://www.instagram.com/kalyan_batthula/) | <kalyancharlie@gmail.com>
-*****
 ### Licensed Under [MIT LICENSE](LICENSE)
